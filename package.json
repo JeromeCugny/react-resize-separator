@@ -1,0 +1,35 @@
+{
+  "name": "react-resize-separator",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/JeromeCugny/react-resize-separator",
+  "keywords": [
+    "react",
+    "react-component",
+    "resize",
+    "separator"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "scss/",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "scripts": {
+    "build:ts": "tsc",
+    "build:scss": "node-sass ./scss -o dist/css --output-style compressed --source-map true",
+    "build": "npm run build:ts && npm run build:scss",
+    "publish": "npm run build && npm publish"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "node-sass": "^9.0.0",
+    "typescript": "^5.2.2"
+  }
+}

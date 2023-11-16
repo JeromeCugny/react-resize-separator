@@ -1,0 +1,39 @@
+.resize-separator {
+  display: inline-block;
+  background-color: darkgray;
+
+  &:hover {
+    cursor: ew-resize;
+    background-color: lightblue;
+  }
+}
+
+.resize-separator-vertical {
+  @extend .resize-separator;
+  
+  width: 0.3rem;
+  height: 100%;
+}
+
+.resize-separator-vertical-absolute {
+  @extend .resize-separator-vertical;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.resize-separator-horizontal {
+  @extend .resize-separator;
+  
+  width: 100%;
+  height: 0.3rem;
+}
+
+.resize-separator-horizontal-absolute {
+  @extend .resize-separator-horizontal;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
