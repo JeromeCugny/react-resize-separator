@@ -41,6 +41,9 @@ const config = {
   resolve: {
     extensions: [".js", ".ts", ".tsx", ".css", ".scss"],
   },
+  devServer: {
+    hot: false,
+  }
 }
 
 module.exports = () => {
