@@ -1,12 +1,14 @@
 import React from "react"
 import { convertPxToVh } from "../misc/utils"
 
-export function VerticalResizeHandle(props: {
+export interface VerticalResizeHandleProps {
   id: string, className?: string,
   attachedElementId?: string,
   onMouseResize?: (event: MouseEvent, elementToResize: HTMLElement, newPxWidth: number) => void,
   onDoubleClick?: (event: MouseEvent, elementToResize: HTMLElement) => void,
-}) {
+}
+
+export const VerticalResizeHandle: React.FC<VerticalResizeHandleProps> = (props) => {
   const { id, className, attachedElementId, onMouseResize, onDoubleClick } = props
   const [isResizing, setIsResizing] = React.useState<boolean>(false)
 
