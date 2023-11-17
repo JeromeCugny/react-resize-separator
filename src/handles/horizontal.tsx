@@ -1,16 +1,21 @@
 import React from "react"
 import { convertPxToVw } from "../misc/utils"
 
-export default function HorizontalResizeHandle(props: {
+export function HorizontalResizeHandle(props: {
   id: string, className?: string,
+  attachedElementId?: string,
   onMouseResize?: (event: MouseEvent, elementToResize: HTMLElement, newPxWidth: number) => void,
   onDoubleClick?: (event: MouseEvent, elementToResize: HTMLElement) => void,
 }) {
-  const { id, className, onMouseResize, onDoubleClick } = props
+  const { id, className, attachedElementId, onMouseResize, onDoubleClick } = props
   const [isResizing, setIsResizing] = React.useState<boolean>(false)
 
-  const selfHTML = document.getElementById(id)
-  const prevHTML = (selfHTML?.previousElementSibling || selfHTML?.parentElement) as HTMLElement
+  let targetedHTML: HTMLElement | null = null
+  if (attachedElementId) targetedHTML = document.getElementById(attachedElementId)
+  else {
+    const selfHTML = document.getElementById(id)
+    targetedHTML = (selfHTML?.previousElementSibling || selfHTML?.parentElement) as HTMLElement
+  }
 
   const HandleMouseMove = (e: MouseEvent, element: HTMLElement) => {
     const prevRect = element?.getBoundingClientRect()
@@ -24,9 +29,9 @@ export default function HorizontalResizeHandle(props: {
   }
 
   const HandleDoubleClick = (e: React.MouseEvent) => {
-    if (onDoubleClick) onDoubleClick(e.nativeEvent, prevHTML)
-    else if (prevHTML) {
-      prevHTML.style.width = "fit-content"
+    if (targetedHTML) {
+      if (onDoubleClick) onDoubleClick(e.nativeEvent, targetedHTML)
+      else targetedHTML.style.width = "fit-content"
     }
   }
 
@@ -36,7 +41,7 @@ export default function HorizontalResizeHandle(props: {
 
   React.useEffect(() => {
     if (isResizing) {
-      const callHandleMouseMove = (e: MouseEvent) => HandleMouseMove(e, prevHTML)
+      const callHandleMouseMove = (e: MouseEvent) => HandleMouseMove(e, targetedHTML!)
 
       window.addEventListener("mouseup", HandleMouseUp)
       window.addEventListener("mousemove", callHandleMouseMove)
@@ -45,7 +50,7 @@ export default function HorizontalResizeHandle(props: {
         window.removeEventListener("mousemove", callHandleMouseMove)
       }
     }
-  }, [isResizing, prevHTML])
+  }, [isResizing, targetedHTML])
 
   return (
     <div id={id} className={className || ""}
