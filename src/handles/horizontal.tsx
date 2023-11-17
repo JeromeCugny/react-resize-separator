@@ -1,12 +1,14 @@
 import React from "react"
 import { convertPxToVw } from "../misc/utils"
 
-export function HorizontalResizeHandle(props: {
+export interface HorizontalResizeHandleProps {
   id: string, className?: string,
   attachedElementId?: string,
   onMouseResize?: (event: MouseEvent, elementToResize: HTMLElement, newPxWidth: number) => void,
   onDoubleClick?: (event: MouseEvent, elementToResize: HTMLElement) => void,
-}) {
+}
+
+export const HorizontalResizeHandle: React.FC<HorizontalResizeHandleProps> = (props) => {
   const { id, className, attachedElementId, onMouseResize, onDoubleClick } = props
   const [isResizing, setIsResizing] = React.useState<boolean>(false)
 
