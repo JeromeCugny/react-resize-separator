@@ -21,8 +21,7 @@
   ],
   "scripts": {
     "build:scss": "node-sass ./scss -o dist/css --output-style compressed --source-map true",
-    "build": "rollup --config rollup.config.cjs && npm run build:scss",
-    "publish": "npm run build && npm publish"
+    "build": "rollup --config rollup.config.cjs && npm run build:scss"
   },
   "peerDependencies": {
     "react": "^18.2.0"

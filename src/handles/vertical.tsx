@@ -4,7 +4,7 @@ import { convertPxToVh } from "../misc/utils"
 export interface VerticalResizeHandleProps {
   id: string, className?: string,
   attachedElementId?: string,
-  onMouseResize?: (event: MouseEvent, elementToResize: HTMLElement, newPxWidth: number) => void,
+  onMouseResize?: (event: MouseEvent, elementToResize: HTMLElement, newPxHeight: number) => void,
   onDoubleClick?: (event: MouseEvent, elementToResize: HTMLElement) => void,
 }
 
